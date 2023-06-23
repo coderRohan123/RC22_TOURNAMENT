@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image Slider</title>
+    <style>
+        .slider-container {
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .slider-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-controls button {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            border: none;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .slider-controls button.active {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-container">
+        <img src="1.jpg" alt="Image 1">
+        <img src="2.jpg" alt="Image 2">
+        <img src="3.jpg" alt="Image 3">
+    </div>
+
+    <div class="slider-controls">
+        <button class="slider-dot active"></button>
+        <button class="slider-dot"></button>
+        <button class="slider-dot"></button>
+    </div>
+
+    <script>
+        // JavaScript code for the slider functionality
+        const images = document.querySelectorAll('.slider-container img');
+        const dots = document.querySelectorAll('.slider-controls button');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            images.forEach((image, i) => {
+                if (i === index) {
+                    image.style.display = 'block';
+                } else {
+                    image.style.display = 'none';
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            showSlide(currentIndex);
+        }
+
+        function previousSlide() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            showSlide(currentIndex);
+        }
+
+        function setSlide(index) {
+            currentIndex = index;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                setSlide(i);
+            });
+        });
+    </script>
+</body>
+
+</html>
