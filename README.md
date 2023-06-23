@@ -1,2 +1,3 @@
 # RC22_TOURNAMENT
-A wensite for tournament
+A website for tournament,
+It includes the details of the tournament,match fixtures and points table 
